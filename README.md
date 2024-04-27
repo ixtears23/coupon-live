@@ -22,6 +22,79 @@
 ## ERD
 ![스크린샷 2024-04-27 오전 1 40 36](https://github.com/ixtears23/coupon-live/assets/31694500/601fa615-5c85-41fa-baca-649838fa6bfb)
 
+## 대략적인 패키지 구조 설계
+```
+junseok.snr.couponlive
+│
+├── application
+│   ├── service                     // Application services implementing use cases
+│   │   ├── UserService.java        // Handles user-related operations
+│   │   ├── EventService.java       // Handles event-related operations
+│   │   ├── CouponService.java      // Handles coupon-related operations
+│   ├── dto                         // Data Transfer Objects
+│   │   ├── UserDTO.java
+│   │   ├── EventDTO.java
+│   │   ├── CouponDTO.java
+│   │   └── CouponIssueDTO.java
+│   └── mapper                      // Mappers for converting between domain objects and DTOs
+│       └── DTOMapper.java
+│
+├── domain
+│   ├── user                        // User domain package
+│   │   ├── model                   // Domain models
+│   │   │   ├── User.java
+│   │   ├── port                    // Ports for the user domain
+│   │   │   ├── in
+│   │   │   │   └── IUserService.java  // Input port interface
+│   │   │   └── out
+│   │   │       └── IUserRepository.java  // Output port interface
+│   │   └── service                 // Domain services
+│   │       └── UserDomainService.java
+│   │
+│   ├── event                       // Event domain package
+│   │   ├── model
+│   │   │   ├── Event.java
+│   │   ├── port
+│   │   │   ├── in
+│   │   │   │   └── IEventService.java
+│   │   │   └── out
+│   │   │       └── IEventRepository.java
+│   │   └── service
+│   │       └── EventDomainService.java
+│   │
+│   ├── coupon                      // Coupon domain package
+│   │   ├── model
+│   │   │   ├── Coupon.java
+│   │   │   ├── CouponIssue.java
+│   │   │   └── CouponType.java
+│   │   ├── port
+│   │   │   ├── in
+│   │   │   │   └── ICouponService.java
+│   │   │   └── out
+│   │   │       └── ICouponRepository.java
+│   │   └── service
+│   │       └── CouponDomainService.java
+│
+├── infrastructure
+│   ├── web                         // Web adapters handling HTTP requests
+│   │   ├── UserController.java
+│   │   ├── EventController.java
+│   │   └── CouponController.java
+│   ├── repository                  // Implementations of output ports
+│   │   ├── UserJpaRepository.java
+│   │   ├── EventJpaRepository.java
+│   │   └── CouponJpaRepository.java
+│   ├── messaging                   // Messaging adapter
+│   │   └── SQSAdapter.java
+│   └── caching                     // Caching adapter
+│       └── RedisAdapter.java
+│
+├── config                          // Configuration settings
+│   └── AppConfig.java
+│
+└── CouponLiveApplication.java                // Main application entry point
+```
+
 ## 커밋 작성 규칙
 
 | 유형      | 설명                                                                                     |
