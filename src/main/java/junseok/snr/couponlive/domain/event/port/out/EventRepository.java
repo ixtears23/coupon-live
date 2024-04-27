@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface EventRepository {
-    Optional<Event> findById(Long aLong);
+    Optional<Event> findById(Integer aLong);
     List<Event> findAll();
     Event save(Event entity);
     List<Event> saveAll(List<Event> entities);
