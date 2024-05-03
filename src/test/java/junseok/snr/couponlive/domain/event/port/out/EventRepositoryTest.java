@@ -4,7 +4,7 @@ import junseok.snr.couponlive.domain.event.model.Event;
 import junseok.snr.couponlive.domain.event.model.EventStatus;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,7 +15,7 @@ import java.util.Optional;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @ActiveProfiles(value = "test-h2")
-@SpringBootTest
+@DataJpaTest
 @Transactional
 class EventRepositoryTest {
 
