@@ -2,7 +2,6 @@ package junseok.snr.couponlive.domain.event.port.out;
 
 import junseok.snr.couponlive.domain.event.model.Event;
 import junseok.snr.couponlive.domain.event.model.EventStatus;
-import junseok.snr.couponlive.intrastructure.repository.EventJpaRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -22,8 +21,6 @@ class EventRepositoryTest {
 
     @Autowired
     private EventRepository<Event> eventRepository;
-    @Autowired
-    private EventJpaRepository eventJpaRepository;
 
     @Test
     void testCreatedEvent() {
@@ -77,12 +74,12 @@ class EventRepositoryTest {
                 .status(EventStatus.PLANNED)
                 .build();
 
-        final Event savedEvent = eventJpaRepository.save(event);
-        final List<Event> eventList = eventJpaRepository.findAll();
+        final Event savedEvent = eventRepository.save(event);
+        final List<Event> eventList = eventRepository.findAll();
         assertThat(eventList).size().isEqualTo(1);
 
-        eventJpaRepository.delete(savedEvent);
-        final List<Event> postDeletionEventList = eventJpaRepository.findAll();
+        eventRepository.delete(savedEvent);
+        final List<Event> postDeletionEventList = eventRepository.findAll();
         assertThat(postDeletionEventList).size().isEqualTo(0);
     }
 
