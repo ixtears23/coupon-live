@@ -1,0 +1,32 @@
+version: '3.7'
+services:
+  redis:
+    container_name: coupon-redis
+    image: redis:7.2-alpine
+    command: redis-server --port 6380
+    labels:
+      - "name=redis"
+      - "mode=standalone"
+    ports:
+      - "6380:6380"
+    volumes:
+      - coupon_redis_data:/data
+  mysql:
+    container_name: coupon-mysql
+    image: ubuntu/mysql:edge
+    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci --explicit_defaults_for_timestamp=1
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_DATABASE=coupon
+      - MYSQL_USER=abed
+      - TZ=UTC
+    volumes:
+      - coupon_mysql_data:/var/lib/mysql
+      - ./mysql/init:/docker-entrypoint-initdb.d
+      - ./mysql_password.txt:/etc/mysql_password.txt
+      - ./mysql_root_password.txt:/etc/mysql_root_password.txt
+    entrypoint: ['/bin/bash', '-c', 'export MYSQL_PASSWORD=$(cat /etc/mysql_password.txt); export MYSQL_ROOT_PASSWORD=$(cat /etc/mysql_root_password.txt); /entrypoint.sh mysqld']
+volumes:
+  coupon_redis_data:
+  coupon_mysql_data:
