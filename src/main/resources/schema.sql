@@ -39,10 +39,12 @@ CREATE TABLE `coupons` (
 
 CREATE TABLE `coupon_pool` (
     `pool_id` INT AUTO_INCREMENT PRIMARY KEY,
+    `coupon_id` INT NOT NULL,
     `issue_id` INT UNIQUE COMMENT '할당된 쿠폰 발행 ID, coupon_issues 테이블 참조',
     `coupon_code` VARCHAR(255) NOT NULL UNIQUE COMMENT '미리 생성된 고유 쿠폰 코드',
     `is_assigned` BOOLEAN NOT NULL DEFAULT FALSE COMMENT '쿠폰 코드가 할당되었는지 여부',
-    `assigned_at` DATETIME COMMENT '쿠폰 코드가 할당된 시간'
+    `assigned_at` DATETIME COMMENT '쿠폰 코드가 할당된 시간',
+    FOREIGN KEY (`coupon_id`) REFERENCES `coupons`(`coupon_id`)
 ) COMMENT '미리 생성된 쿠폰 코드의 풀을 관리하는 테이블';
 
 CREATE TABLE `coupon_issues` (
