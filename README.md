@@ -1,5 +1,40 @@
 # 대용량 트래픽 쿠폰 발급 시스템
 
+## 실행 방법
+- `mysql_password.txt` 파일 생성
+  - 파일 위치 : 프로젝트 루트 경로
+  - 파일 내용 : 비밀번호만 입력  
+  비밀번호가 `abcd` 인 경우 파일 내용은 `abcd`
+- `mysql_root_password.txt` 파일 생성
+  - 파일 위치 : 프로젝트 루트 경로
+  - 파일 내용 : 비밀번호만 입력  
+  비밀번호가 `abcd` 인 경우 파일 내용은 `abcd`
+- redis, mysql container 실행(프로젝트 루트 경로에서 아래 스크립트 실행)
+  ~~~shell
+  $ docker-compose up -d
+  ~~~
+- profile : local
+- Environment 설정 예시
+  - intelliJ  
+    Environment Variables : `DATABASE_PASSWORD=********`
+  - docker  
+  `docker run -e DATABASE_PASSWORD=********`
+  - 시스템 환경변수  
+  `export DATABASE_PASSWORD=********`
+- Run...
+## 성능 테스트 방법
+
+- `./locust` 경로 이동
+- 성능 테스트 도구 locust 실행
+  ~~~shell
+  $ docker-compose up -d
+  ~~~
+- 부하 가중을 위한 worker scale out
+  ~~~shell
+  $ docker-compose scale worker=3
+  ~~~
+
+
 ## 기능 요구사항
 1. 사용자 인증  
 로그인한 사용자만 쿠폰을 발급받을 수 있어야 합니다.  인증되지 않은 사용자는 쿠폰 발급 접근이 제한됩니다.
