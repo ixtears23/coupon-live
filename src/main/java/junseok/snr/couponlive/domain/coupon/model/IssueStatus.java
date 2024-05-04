@@ -1,5 +1,14 @@
 package junseok.snr.couponlive.domain.coupon.model;
 
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+
+@Getter
+@RequiredArgsConstructor
 enum IssueStatus {
-    ISSUED, REDEEMED, EXPIRED
+    ISSUED("발행됨"),
+    REDEEMED("사용됨"),
+    EXPIRED("만료됨");
+
+    private final String comments;
 }
