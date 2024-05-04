@@ -1,9 +1,9 @@
 package junseok.snr.couponlive.domain.coupon.model;
 
 import jakarta.persistence.*;
+import junseok.snr.couponlive.domain.event.model.Event;
 import lombok.*;
 
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Builder
@@ -19,8 +19,13 @@ public class Coupon {
     @Column(name = "coupon_id")
     private Integer couponId;
 
-    @Column(name = "type_id")
-    private Integer typeId;
+    @ManyToOne
+    @JoinColumn(name = "event_id")
+    private Event event;
+
+    @ManyToOne
+    @JoinColumn(name = "type_id")
+    private CouponType type;
 
     @Column(name = "coupon_code")
     private String couponCode;
@@ -28,8 +33,8 @@ public class Coupon {
     @Column(name = "description")
     private String description;
 
-    @Column(name = "amount", precision = 10, scale = 2)
-    private BigDecimal amount;
+    @Column(name = "amount")
+    private Integer amount;
 
     @Column(name = "valid_from")
     private LocalDateTime validFrom;

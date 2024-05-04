@@ -16,10 +16,10 @@ public class CouponType {
     @Column(name = "type_id")
     private Integer typeId;
 
-    @Column(name = "type_name")
+    @Column(name = "type_name", nullable = false)
     private String typeName;
 
-    @Column(name = "description")
+    @Column(name = "description", nullable = false)
     private String description;
 
 }
