@@ -20,7 +20,8 @@
   이는 데이터베이스의 트랜잭션과 락(lock) 기술을 통해 관리됩니다.
 
 ## ERD
-![스크린샷 2024-04-27 오전 1 40 36](https://github.com/ixtears23/coupon-live/assets/31694500/601fa615-5c85-41fa-baca-649838fa6bfb)
+![쿠폰이벤트ERD](https://github.com/ixtears23/coupon-live/assets/31694500/606832e6-2c9f-4e99-b21f-b5942e99c355)
+
 
 ## 대략적인 패키지 구조 설계
 ```
