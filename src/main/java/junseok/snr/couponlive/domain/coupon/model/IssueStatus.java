@@ -5,7 +5,7 @@ import lombok.RequiredArgsConstructor;
 
 @Getter
 @RequiredArgsConstructor
-enum IssueStatus {
+public enum IssueStatus {
     ISSUED("발행됨"),
     REDEEMED("사용됨"),
     EXPIRED("만료됨");
