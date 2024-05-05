@@ -1,7 +1,10 @@
 package junseok.snr.couponlive.domain.coupon.model;
 
 import jakarta.persistence.*;
+import junseok.snr.couponlive.domain.coupon.exception.CouponIssuanceException;
+import junseok.snr.couponlive.domain.coupon.exception.ErrorCode;
 import junseok.snr.couponlive.domain.event.model.Event;
+import junseok.snr.couponlive.domain.user.model.User;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -51,5 +54,35 @@ public class Coupon {
     @Enumerated(EnumType.STRING)
     @Column(name = "status")
     private CouponStatus status;
+
+    public CouponIssue issue(User user) {
+        validateAvailableQuantity();
+        validateAvailableDate();
+
+        this.remainingQuantity--;
+
+        return CouponIssue.builder()
+                .coupon(this)
+                .user(user)
+                .status(IssueStatus.ISSUED)
+                .initialAmount(amount)
+                .remainingAmount(amount)
+                .validFrom(validFrom)
+                .validTo(validTo)
+                .issuedAt(LocalDateTime.now())
+                .build();
+    }
+
+    private void validateAvailableDate() {
+        if (!LocalDateTime.now().isBefore(validTo)) {
+            throw new CouponIssuanceException(ErrorCode.COUPON_EXPIRED);
+        }
+    }
+
+    private void validateAvailableQuantity() {
+        if (remainingQuantity <= 0) {
+            throw new CouponIssuanceException(ErrorCode.REMAINING_QUANTITY_EXCEEDED);
+        }
+    }
 
 }
