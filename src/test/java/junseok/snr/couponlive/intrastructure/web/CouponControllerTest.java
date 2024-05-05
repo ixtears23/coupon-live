@@ -13,6 +13,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
+import static org.hamcrest.Matchers.containsInAnyOrder;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -84,10 +85,8 @@ class CouponControllerTest {
                 .andExpect(status().isBadRequest())
                 .andExpect(jsonPath("$").isArray())
                 .andExpect(jsonPath("$.length()").value(2))
-                .andExpect(jsonPath("$[0].code").value("userId"))
-                .andExpect(jsonPath("$[0].message").value("must be greater than or equal to 1"))
-                .andExpect(jsonPath("$[1].code").value("couponId"))
-                .andExpect(jsonPath("$[1].message").value("must be greater than or equal to 1"));
+                .andExpect(jsonPath("$[*].code", containsInAnyOrder("userId", "couponId")))
+                .andExpect(jsonPath("$[*].message", containsInAnyOrder("must be greater than or equal to 1", "must be greater than or equal to 1")));
 
     }
 }
