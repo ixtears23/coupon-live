@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Setter
 @Getter
@@ -18,6 +19,10 @@ public class CouponPool {
     @Column(name = "pool_id")
     private Integer poolId;
 
+    @ManyToOne
+    @JoinColumn(name = "coupon_id")
+    private Coupon coupon;
+
     @OneToOne
     @JoinColumn(name = "issue_id")
     private CouponIssue couponIssue;
@@ -30,4 +35,10 @@ public class CouponPool {
 
     @Column(name = "assigned_at")
     private LocalDateTime assignedAt;
+
+    public CouponPool(Coupon coupon) {
+        this.coupon = coupon;
+        this.couponCode = UUID.randomUUID().toString();
+        this.isAssigned = false;
+    }
 }
