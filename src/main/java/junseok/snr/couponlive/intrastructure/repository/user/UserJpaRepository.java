@@ -1,4 +1,4 @@
-package junseok.snr.couponlive.intrastructure.repository;
+package junseok.snr.couponlive.intrastructure.repository.user;
 
 import junseok.snr.couponlive.domain.user.model.User;
 import junseok.snr.couponlive.domain.user.port.out.UserRepository;

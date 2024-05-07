@@ -1,4 +1,4 @@
-package junseok.snr.couponlive.intrastructure.repository;
+package junseok.snr.couponlive.intrastructure.repository.event;
 
 import junseok.snr.couponlive.domain.event.model.Event;
 import junseok.snr.couponlive.domain.event.port.out.EventRepository;

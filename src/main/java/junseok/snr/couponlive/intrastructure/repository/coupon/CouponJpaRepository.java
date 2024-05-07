@@ -1,4 +1,4 @@
-package junseok.snr.couponlive.intrastructure.repository;
+package junseok.snr.couponlive.intrastructure.repository.coupon;
 
 import junseok.snr.couponlive.domain.coupon.model.Coupon;
 import junseok.snr.couponlive.domain.coupon.port.out.CouponRepository;
