@@ -8,12 +8,13 @@ import junseok.snr.couponlive.domain.user.model.User;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.IntStream;
 
-@Builder
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 @Setter
-@AllArgsConstructor
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 @Table(name = "coupons")
 public class Coupon {
@@ -21,6 +22,9 @@ public class Coupon {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "coupon_id")
     private Integer couponId;
+
+    @OneToMany(mappedBy = "coupon", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<CouponPool> pools = new ArrayList<>();
 
     @ManyToOne
     @JoinColumn(name = "event_id")
@@ -54,6 +58,28 @@ public class Coupon {
     @Enumerated(EnumType.STRING)
     @Column(name = "status")
     private CouponStatus status;
+
+    @Builder
+    public Coupon(Event event, CouponType type, String couponCode, String description, Integer amount,
+                  LocalDateTime validFrom, LocalDateTime validTo, Integer totalQuantity, Integer remainingQuantity, CouponStatus status) {
+        this.event = event;
+        this.type = type;
+        this.couponCode = couponCode;
+        this.description = description;
+        this.amount = amount;
+        this.validFrom = validFrom;
+        this.validTo = validTo;
+        this.totalQuantity = totalQuantity;
+        this.remainingQuantity = remainingQuantity;
+        this.status = status;
+        initializePools();  // Ensure pools are initialized with totalQuantity
+    }
+
+    private void initializePools() {
+        this.pools = IntStream.range(0, totalQuantity)
+                .mapToObj(i -> new CouponPool(this))
+                .toList();
+    }
 
     public CouponIssue issue(User user) {
         validateAvailableQuantity();
