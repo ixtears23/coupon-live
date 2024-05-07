@@ -42,8 +42,8 @@ class CouponRepositoryTest {
                 .status(CouponStatus.ACTIVE)
                 .description("BlackFriday 3만원 쿠폰!")
                 .amount(30_000)
-                .totalQuantity(100_000)
-                .remainingQuantity(100_000)
+                .totalQuantity(5)
+                .remainingQuantity(5)
                 .validFrom(LocalDateTime.of(2024, 5, 4, 10, 0, 0))
                 .validTo(LocalDateTime.of(2024, 5, 4, 10, 0, 0))
                 .build();
@@ -86,8 +86,8 @@ class CouponRepositoryTest {
                 .status(CouponStatus.ACTIVE)
                 .description("BlackFriday 3만원 쿠폰!")
                 .amount(30_000)
-                .totalQuantity(100_000)
-                .remainingQuantity(100_000)
+                .totalQuantity(5)
+                .remainingQuantity(5)
                 .validFrom(LocalDateTime.of(2024, 5, 4, 10, 0, 0))
                 .validTo(LocalDateTime.of(2024, 5, 4, 10, 0, 0))
                 .build();
@@ -98,8 +98,8 @@ class CouponRepositoryTest {
                 .status(CouponStatus.ACTIVE)
                 .description("여름할인 1만원 쿠폰!")
                 .amount(10_000)
-                .totalQuantity(100_000)
-                .remainingQuantity(100_000)
+                .totalQuantity(5)
+                .remainingQuantity(5)
                 .validFrom(LocalDateTime.of(2024, 5, 4, 10, 0, 0))
                 .validTo(LocalDateTime.of(2024, 5, 4, 10, 0, 0))
                 .build();
@@ -128,8 +128,8 @@ class CouponRepositoryTest {
                 .status(CouponStatus.ACTIVE)
                 .description("BlackFriday 3만원 쿠폰!")
                 .amount(30_000)
-                .totalQuantity(100_000)
-                .remainingQuantity(100_000)
+                .totalQuantity(5)
+                .remainingQuantity(5)
                 .validFrom(LocalDateTime.of(2024, 5, 4, 10, 0, 0))
                 .validTo(LocalDateTime.of(2024, 5, 4, 10, 0, 0))
                 .build();

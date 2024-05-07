@@ -51,8 +51,8 @@ class CouponIssueRepositoryTest {
                 .status(CouponStatus.ACTIVE)
                 .description("BlackFriday 3만원 쿠폰!")
                 .amount(30_000)
-                .totalQuantity(100_000)
-                .remainingQuantity(100_000)
+                .totalQuantity(5)
+                .remainingQuantity(5)
                 .validFrom(LocalDateTime.of(2024, 5, 4, 10, 0, 0))
                 .validTo(LocalDateTime.of(2024, 5, 4, 10, 0, 0))
                 .build();
@@ -70,8 +70,8 @@ class CouponIssueRepositoryTest {
 
     @Test
     void testCreatedCouponIssue() {
-        final Coupon coupon = couponRepository.findById(1)
-                .orElseThrow();
+        final Coupon coupon = couponRepository.findAll()
+                .getFirst();
 
         final User user = userRepository.findById(1).orElseThrow();
 
