@@ -7,12 +7,11 @@ import junseok.snr.couponlive.domain.user.model.User;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.mockito.MockitoAnnotations;
 
 import java.time.LocalDateTime;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class CouponTest {
     private Coupon coupon;
@@ -20,10 +19,8 @@ class CouponTest {
 
     @BeforeEach
     void setUp() {
-        MockitoAnnotations.initMocks(this);
         user = User.builder().build();
         coupon = Coupon.builder()
-                .couponId(1)
                 .event(Event.builder().build())
                 .type(new CouponType())
                 .couponCode("TESTCODE")
@@ -31,8 +28,8 @@ class CouponTest {
                 .amount(100)
                 .validFrom(LocalDateTime.now().minusDays(1))
                 .validTo(LocalDateTime.now().plusDays(1))
-                .totalQuantity(100)
-                .remainingQuantity(10)
+                .totalQuantity(5)
+                .remainingQuantity(5)
                 .status(CouponStatus.ACTIVE)
                 .build();
     }
@@ -43,7 +40,7 @@ class CouponTest {
         CouponIssue issue = coupon.issue(user);
         assertThat(issue).isNotNull();
         assertThat(issue.getStatus()).isEqualTo(IssueStatus.ISSUED);
-        assertThat(coupon.getRemainingQuantity()).isEqualTo(9);
+        assertThat(coupon.getRemainingQuantity()).isEqualTo(4);
     }
 
     @Test
