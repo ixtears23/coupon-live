@@ -1,7 +1,7 @@
 package junseok.snr.couponlive.intrastructure.web;
 
 import jakarta.validation.Valid;
-import junseok.snr.couponlive.application.CouponService;
+import junseok.snr.couponlive.application.coupon.port.in.CouponService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +20,7 @@ public class CouponController {
     @PostMapping
     public ResponseEntity<Void> issueCoupon(@RequestBody @Valid IssueCouponRequest request) {
         log.info("=== 쿠폰 발급 - userId: {}, couponId: {}", request.userId(), request.couponId());
-        couponService.issueCoupon();
+        couponService.issueCoupon(request);
 
         return ResponseEntity.ok(null);
     }

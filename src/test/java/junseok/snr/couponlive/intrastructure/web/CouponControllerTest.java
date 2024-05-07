@@ -1,6 +1,6 @@
 package junseok.snr.couponlive.intrastructure.web;
 
-import junseok.snr.couponlive.application.CouponService;
+import junseok.snr.couponlive.application.coupon.port.in.CouponService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
