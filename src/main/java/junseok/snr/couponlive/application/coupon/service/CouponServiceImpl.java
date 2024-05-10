@@ -22,7 +22,7 @@ public class CouponServiceImpl implements CouponService {
     @Transactional
     @Override
     public void issueCoupon(IssueCouponRequest request) {
-        final Coupon coupon = couponDomainService.findById(request.couponId());
+        final Coupon coupon = couponDomainService.findCouponOrThrow(request.couponId());
         final User user = userDomainService.findById(request.userId());
 
         final CouponIssue issuedCoupon = coupon.issue(user);

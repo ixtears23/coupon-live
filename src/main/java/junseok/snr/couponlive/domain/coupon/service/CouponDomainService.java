@@ -1,5 +1,7 @@
 package junseok.snr.couponlive.domain.coupon.service;
 
+import junseok.snr.couponlive.domain.coupon.exception.CouponIssuanceException;
+import junseok.snr.couponlive.domain.coupon.exception.ErrorCode;
 import junseok.snr.couponlive.domain.coupon.model.Coupon;
 import junseok.snr.couponlive.domain.coupon.port.out.CouponRepository;
 import lombok.RequiredArgsConstructor;
@@ -8,8 +10,8 @@ import lombok.RequiredArgsConstructor;
 public class CouponDomainService {
     private final CouponRepository<Coupon> couponRepository;
 
-    public Coupon findById(int couponId) {
+    public Coupon findCouponOrThrow(int couponId) {
         return couponRepository.findById(couponId)
-                .orElseThrow();
+                .orElseThrow(() -> new CouponIssuanceException(ErrorCode.COUPON_NOT_FOUND));
     }
 }
