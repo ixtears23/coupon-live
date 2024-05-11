@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class EventController {
     private final EventService eventService;
 
-    @PostMapping
+    @PostMapping("/random")
     public ResponseEntity<Void> createRandomEvent() {
         eventService.createRandomEvent();
         return ResponseEntity.ok(null);
