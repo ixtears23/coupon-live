@@ -8,7 +8,7 @@ import lombok.RequiredArgsConstructor;
 public class CouponIssueDomainService {
     private final CouponIssueRepository couponIssueRepository;
 
-    public void save(CouponIssue couponIssue) {
+    public void issueCoupon(CouponIssue couponIssue) {
         couponIssueRepository.save(couponIssue);
     }
 }
