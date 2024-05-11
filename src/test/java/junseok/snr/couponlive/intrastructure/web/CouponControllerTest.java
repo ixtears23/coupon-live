@@ -46,7 +46,7 @@ class CouponControllerTest {
                                 }
                             """;
 
-        mockMvc.perform(post("/v1/coupon")
+        mockMvc.perform(post("/v1/coupon/issue")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(jsonRequest))
                 .andDo(print())

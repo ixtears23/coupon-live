@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class CouponController {
     private final CouponService couponService;
 
-    @PostMapping
+    @PostMapping("/issue")
     public ResponseEntity<Void> issueCoupon(@RequestBody @Valid IssueCouponRequest request) {
         log.info("=== 쿠폰 발급 - userId: {}, couponId: {}", request.userId(), request.couponId());
         couponService.issueCoupon(request);
