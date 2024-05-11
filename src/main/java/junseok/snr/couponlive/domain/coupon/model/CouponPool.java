@@ -41,4 +41,10 @@ public class CouponPool {
         this.couponCode = UUID.randomUUID().toString();
         this.isAssigned = false;
     }
+
+    public void issueCoupon(CouponIssue couponIssue) {
+        this.couponIssue = couponIssue;
+        this.isAssigned = true;
+        this.assignedAt = LocalDateTime.now();
+    }
 }
