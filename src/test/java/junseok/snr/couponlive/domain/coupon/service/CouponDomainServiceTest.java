@@ -55,8 +55,8 @@ class CouponDomainServiceTest {
 
         final Coupon foundCoupon = couponDomainService.findCouponOrThrow(1);
 
-        assertThat(foundCoupon).isNotNull();
-        assertThat(foundCoupon).isEqualTo(coupon);
+        assertThat(foundCoupon).isNotNull()
+                        .isEqualTo(coupon);
     }
 
 }
