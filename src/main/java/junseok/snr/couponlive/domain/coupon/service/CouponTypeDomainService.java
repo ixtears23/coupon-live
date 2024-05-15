@@ -12,4 +12,8 @@ public class CouponTypeDomainService {
         return couponTypeRepository.findById(typeId)
                 .orElseThrow();
     }
+
+    public CouponType save(CouponType couponType) {
+        return couponTypeRepository.save(couponType);
+    }
 }

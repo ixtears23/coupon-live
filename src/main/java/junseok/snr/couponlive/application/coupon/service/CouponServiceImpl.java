@@ -51,6 +51,7 @@ public class CouponServiceImpl implements CouponService {
         couponIssueDomainService.issueCoupon(issuedCoupon);
     }
 
+    @Transactional
     @Override
     public CreateCouponResponse createCoupon(CreateCouponRequest request) {
 
