@@ -7,6 +7,6 @@ public interface EventRepository<T> {
     Optional<T> findById(Integer aLong);
     List<T> findAll();
     <S extends T> S save(S entity);
-    <S extends T> List<S> saveAll(Iterable<S> entities);  // 제네릭 메서드로 변경
+    <S extends T> List<S> saveAll(Iterable<S> entities);
     void delete(T entity);
 }

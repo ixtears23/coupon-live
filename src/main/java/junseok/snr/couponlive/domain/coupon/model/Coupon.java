@@ -60,8 +60,15 @@ public class Coupon {
     private CouponStatus status;
 
     @Builder
-    public Coupon(Event event, CouponType type, String couponCode, String description, Integer amount,
-                  LocalDateTime validFrom, LocalDateTime validTo, Integer totalQuantity, Integer remainingQuantity, CouponStatus status) {
+    public Coupon(Event event,
+                  CouponType type,
+                  String couponCode,
+                  String description,
+                  Integer amount,
+                  LocalDateTime validFrom,
+                  LocalDateTime validTo,
+                  Integer totalQuantity,
+                  Integer remainingQuantity) {
         this.event = event;
         this.type = type;
         this.couponCode = couponCode;
@@ -71,8 +78,8 @@ public class Coupon {
         this.validTo = validTo;
         this.totalQuantity = totalQuantity;
         this.remainingQuantity = remainingQuantity;
-        this.status = status;
-        initializePools();  // Ensure pools are initialized with totalQuantity
+        this.status = CouponStatus.ACTIVE;
+        initializePools();
     }
 
     private void initializePools() {

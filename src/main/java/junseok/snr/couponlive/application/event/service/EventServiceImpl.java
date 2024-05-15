@@ -3,7 +3,7 @@ package junseok.snr.couponlive.application.event.service;
 import junseok.snr.couponlive.application.event.port.in.EventService;
 import junseok.snr.couponlive.domain.event.model.Event;
 import junseok.snr.couponlive.domain.event.model.EventStatus;
-import junseok.snr.couponlive.domain.event.port.out.EventRepository;
+import junseok.snr.couponlive.domain.event.service.EventDomainService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -16,7 +16,7 @@ import java.util.Random;
 @RequiredArgsConstructor
 @Service
 public class EventServiceImpl implements EventService {
-    private final EventRepository<Event> eventRepository;
+    private final EventDomainService eventDomainService;
     private static final Random random = new Random();
 
     @Override
@@ -33,14 +33,14 @@ public class EventServiceImpl implements EventService {
                 .status(EventStatus.ONGOING)
                 .build();
 
-        eventRepository.save(event);
+        eventDomainService.save(event);
         log.info("=== savedEvent : {}", event);
     }
 
     private String createEventName() {
 
         // 무작위 이벤트 이름 생성
-        List<String> eventNames = List.of(
+        final List<String> eventNames = List.of(
                 "Concert", "Festival", "Conference", "Seminar", "Workshop",
                 "Exhibition", "Meetup", "Webinar", "Hackathon", "Symposium"
         );

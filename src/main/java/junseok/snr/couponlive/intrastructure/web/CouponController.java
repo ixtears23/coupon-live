@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RequiredArgsConstructor
 @Slf4j
-@RequestMapping("/v1/coupon")
+@RequestMapping("/v1/coupons")
 @RestController
 public class CouponController {
     private final CouponService couponService;
@@ -24,4 +24,12 @@ public class CouponController {
 
         return ResponseEntity.ok(null);
     }
+
+    @PostMapping
+    public ResponseEntity<CreateCouponResponse> createCoupon(@RequestBody @Valid CreateCouponRequest request) {
+        log.info("=== 쿠폰 생성 - request : {}", request);
+        final CreateCouponResponse response = couponService.createCoupon(request);
+        return ResponseEntity.ok(response);
+    }
+
 }

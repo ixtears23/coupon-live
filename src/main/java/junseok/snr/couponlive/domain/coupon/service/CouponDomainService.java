@@ -14,4 +14,8 @@ public class CouponDomainService {
         return couponRepository.findById(couponId)
                 .orElseThrow(() -> new CouponIssuanceException(ErrorCode.COUPON_NOT_FOUND));
     }
+
+    public Coupon createCoupon(Coupon coupon) {
+        return couponRepository.save(coupon);
+    }
 }
