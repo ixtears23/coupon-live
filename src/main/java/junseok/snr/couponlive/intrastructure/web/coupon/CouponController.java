@@ -21,11 +21,11 @@ public class CouponController {
     private final CouponService couponService;
 
     @PostMapping("/issue")
-    public ResponseEntity<Void> issueCoupon(@RequestBody @Valid IssueCouponRequest request) {
+    public ResponseEntity<String> issueCoupon(@RequestBody @Valid IssueCouponRequest request) {
         log.info("=== 쿠폰 발급 - userId: {}, couponId: {}", request.userId(), request.couponId());
         couponService.issueCoupon(request);
 
-        return ResponseEntity.ok(null);
+        return ResponseEntity.ok("쿠폰이 발급되었습니다.");
     }
 
     @PostMapping
