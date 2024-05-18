@@ -10,6 +10,7 @@ import lombok.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.IntStream;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -91,6 +92,7 @@ public class Coupon {
     public CouponIssue issue(User user) {
         validateAvailableQuantity();
         validateAvailableDate();
+        validateAlreadyIssuedToUser(user);
 
         this.remainingQuantity--;
 
@@ -104,6 +106,19 @@ public class Coupon {
                 .validTo(validTo)
                 .issuedAt(LocalDateTime.now())
                 .build();
+    }
+
+    private void validateAlreadyIssuedToUser(User user) {
+        final CouponIssue issuedCoupon = this.getPools().stream()
+                .map(CouponPool::getCouponIssue)
+                .filter(Objects::nonNull)
+                .filter(couponIssue -> couponIssue.getUser() == user)
+                .findAny()
+                .orElse(null);
+
+        if (issuedCoupon != null) {
+            throw new CouponIssuanceException(ErrorCode.COUPON_ALREADY_ISSUED_TO_USER);
+        }
     }
 
     private void validateAvailableDate() {
