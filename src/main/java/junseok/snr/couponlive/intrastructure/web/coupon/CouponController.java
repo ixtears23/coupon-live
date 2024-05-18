@@ -1,7 +1,9 @@
-package junseok.snr.couponlive.intrastructure.web;
+package junseok.snr.couponlive.intrastructure.web.coupon;
 
 import jakarta.validation.Valid;
 import junseok.snr.couponlive.application.coupon.port.in.CouponService;
+import junseok.snr.couponlive.intrastructure.web.coupon.dto.CreateCouponRequest;
+import junseok.snr.couponlive.intrastructure.web.coupon.dto.CreateCouponResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;

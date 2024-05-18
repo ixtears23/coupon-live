@@ -1,4 +1,4 @@
-package junseok.snr.couponlive.intrastructure.web;
+package junseok.snr.couponlive.intrastructure.web.coupon;
 
 import junseok.snr.couponlive.intrastructure.web.common.ErrorResponse;
 import org.springframework.http.HttpStatus;

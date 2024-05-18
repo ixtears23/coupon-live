@@ -1,4 +1,4 @@
-package junseok.snr.couponlive.intrastructure.web;
+package junseok.snr.couponlive.intrastructure.web.coupon;
 
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;

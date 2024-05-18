@@ -3,8 +3,8 @@ package junseok.snr.couponlive.application.coupon.service;
 import junseok.snr.couponlive.application.coupon.port.in.CouponTypeService;
 import junseok.snr.couponlive.domain.coupon.model.CouponType;
 import junseok.snr.couponlive.domain.coupon.service.CouponTypeDomainService;
-import junseok.snr.couponlive.intrastructure.web.CreateCouponTypeRequest;
-import junseok.snr.couponlive.intrastructure.web.CreateCouponTypeResponse;
+import junseok.snr.couponlive.intrastructure.web.coupon.dto.CreateCouponTypeRequest;
+import junseok.snr.couponlive.intrastructure.web.coupon.dto.CreateCouponTypeResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,5 +26,5 @@ public class CouponTypeServiceImpl implements CouponTypeService {
         CouponType savedCouponType = couponTypeDomainService.save(couponType);
         return new CreateCouponTypeResponse(savedCouponType.getTypeId());
     }
-    
+
 }

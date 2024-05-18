@@ -30,7 +30,6 @@ class CouponTest {
                 .validTo(LocalDateTime.now().plusDays(1))
                 .totalQuantity(5)
                 .remainingQuantity(5)
-                .status(CouponStatus.ACTIVE)
                 .build();
     }
 

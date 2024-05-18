@@ -3,7 +3,6 @@ package junseok.snr.couponlive.domain.coupon.port.out;
 import junseok.snr.couponlive.TestRepositoryConfig;
 import junseok.snr.couponlive.domain.coupon.model.Coupon;
 import junseok.snr.couponlive.domain.coupon.model.CouponIssue;
-import junseok.snr.couponlive.domain.coupon.model.CouponStatus;
 import junseok.snr.couponlive.domain.coupon.model.IssueStatus;
 import junseok.snr.couponlive.domain.event.model.Event;
 import junseok.snr.couponlive.domain.event.model.EventStatus;
@@ -48,7 +47,6 @@ class CouponIssueRepositoryTest {
         final Coupon coupon = Coupon.builder()
                 .event(event)
                 .couponCode("CPN-001")
-                .status(CouponStatus.ACTIVE)
                 .description("BlackFriday 3만원 쿠폰!")
                 .amount(30_000)
                 .totalQuantity(5)

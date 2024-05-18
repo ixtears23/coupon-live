@@ -1,4 +1,4 @@
-package junseok.snr.couponlive.intrastructure.web;
+package junseok.snr.couponlive.intrastructure.web.user;
 
 import junseok.snr.couponlive.application.user.port.in.UserService;
 import lombok.RequiredArgsConstructor;

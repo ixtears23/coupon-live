@@ -1,6 +1,7 @@
 package junseok.snr.couponlive.intrastructure.web;
 
 import junseok.snr.couponlive.application.coupon.port.in.CouponService;
+import junseok.snr.couponlive.intrastructure.web.coupon.CouponController;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -46,7 +47,7 @@ class CouponControllerTest {
                                 }
                             """;
 
-        mockMvc.perform(post("/v1/coupon/issue")
+        mockMvc.perform(post("/v1/coupons/issue")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(jsonRequest))
                 .andDo(print())
@@ -62,7 +63,7 @@ class CouponControllerTest {
                                 }
                             """;
 
-        mockMvc.perform(post("/v1/coupon")
+        mockMvc.perform(post("/v1/coupons/issue")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(jsonRequest))
                 .andDo(print())
@@ -78,7 +79,7 @@ class CouponControllerTest {
     void testIssueCouponFail_2() throws Exception {
         String jsonRequest = "{}";
 
-        mockMvc.perform(post("/v1/coupon")
+        mockMvc.perform(post("/v1/coupons/issue")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(jsonRequest))
                 .andDo(print())

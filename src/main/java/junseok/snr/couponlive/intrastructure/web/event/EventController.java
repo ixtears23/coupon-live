@@ -1,4 +1,4 @@
-package junseok.snr.couponlive.intrastructure.web;
+package junseok.snr.couponlive.intrastructure.web.event;
 
 import junseok.snr.couponlive.application.event.port.in.EventService;
 import lombok.RequiredArgsConstructor;

@@ -1,4 +1,4 @@
-package junseok.snr.couponlive.intrastructure.web;
+package junseok.snr.couponlive.intrastructure.web.coupon.dto;
 
 import java.time.LocalDateTime;
 
