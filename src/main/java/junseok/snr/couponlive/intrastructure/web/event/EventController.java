@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/v1/event")
+@RequestMapping("/v1/events")
 public class EventController {
     private final EventService eventService;
 
