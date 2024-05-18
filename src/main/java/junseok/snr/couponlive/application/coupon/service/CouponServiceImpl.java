@@ -39,9 +39,8 @@ public class CouponServiceImpl implements CouponService {
     public void issueCoupon(IssueCouponRequest request) {
         final Coupon coupon = couponDomainService.findCouponOrThrow(request.couponId());
         final User user = userDomainService.findById(request.userId());
-        couponIssueDomainService.validateCouponIssuanceForUser(request.couponId(), request.userId());
 
-        final CouponIssue issuedCoupon = coupon.issue(user);
+        final CouponIssue couponIssue = coupon.issue(user);
 
         final List<CouponPool> couponPoolList = couponPoolDomainService.findByCouponId(coupon.getCouponId());
         final CouponPool foundCouponPool = couponPoolList.stream()
@@ -49,8 +48,8 @@ public class CouponServiceImpl implements CouponService {
                 .findFirst()
                 .orElseThrow(() -> new CouponIssuanceException(ErrorCode.NO_AVAILABLE_COUPON_POOL));
 
-        foundCouponPool.issueCoupon(issuedCoupon);
-        couponIssueDomainService.issueCoupon(issuedCoupon);
+        foundCouponPool.issueCoupon(couponIssue);
+        couponIssueDomainService.issueCoupon(couponIssue);
     }
 
     @Transactional
