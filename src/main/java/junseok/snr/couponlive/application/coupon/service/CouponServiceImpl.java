@@ -1,6 +1,8 @@
 package junseok.snr.couponlive.application.coupon.service;
 
 import junseok.snr.couponlive.application.coupon.port.in.CouponService;
+import junseok.snr.couponlive.domain.coupon.exception.CouponIssuanceException;
+import junseok.snr.couponlive.domain.coupon.exception.ErrorCode;
 import junseok.snr.couponlive.domain.coupon.model.Coupon;
 import junseok.snr.couponlive.domain.coupon.model.CouponIssue;
 import junseok.snr.couponlive.domain.coupon.model.CouponPool;
@@ -15,7 +17,7 @@ import junseok.snr.couponlive.domain.user.model.User;
 import junseok.snr.couponlive.domain.user.service.UserDomainService;
 import junseok.snr.couponlive.intrastructure.web.coupon.dto.CreateCouponRequest;
 import junseok.snr.couponlive.intrastructure.web.coupon.dto.CreateCouponResponse;
-import junseok.snr.couponlive.intrastructure.web.coupon.IssueCouponRequest;
+import junseok.snr.couponlive.intrastructure.web.coupon.dto.IssueCouponRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -37,17 +39,17 @@ public class CouponServiceImpl implements CouponService {
     public void issueCoupon(IssueCouponRequest request) {
         final Coupon coupon = couponDomainService.findCouponOrThrow(request.couponId());
         final User user = userDomainService.findById(request.userId());
+        couponIssueDomainService.validateCouponIssuanceForUser(request.couponId(), request.userId());
+
         final CouponIssue issuedCoupon = coupon.issue(user);
 
         final List<CouponPool> couponPoolList = couponPoolDomainService.findByCouponId(coupon.getCouponId());
-
         final CouponPool foundCouponPool = couponPoolList.stream()
                 .filter(couponPool -> !couponPool.getIsAssigned())
                 .findFirst()
-                .orElseThrow();
+                .orElseThrow(() -> new CouponIssuanceException(ErrorCode.NO_AVAILABLE_COUPON_POOL));
 
         foundCouponPool.issueCoupon(issuedCoupon);
-
         couponIssueDomainService.issueCoupon(issuedCoupon);
     }
 
