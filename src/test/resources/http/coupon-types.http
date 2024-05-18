@@ -1,0 +1,25 @@
+POST http://127.0.0.1:8080/v1/coupon-types
+Content-Type: application/json
+
+{
+  "typeName": "Percentage Off",
+  "description": "Discounts by a percentage of the total price"
+}
+
+###
+POST http://127.0.0.1:8080/v1/coupon-types
+Content-Type: application/json
+
+{
+"typeName": "Fixed Amount Off",
+"description": "Discounts by a fixed amount"
+}
+
+###
+POST http://127.0.0.1:8080/v1/coupon-types
+Content-Type: application/json
+
+{
+"typeName": "Free Shipping",
+"description": "Provides free shipping"
+}

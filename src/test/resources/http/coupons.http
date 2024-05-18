@@ -1,0 +1,14 @@
+POST http://127.0.0.1:8080/v1/coupons
+Content-Type: application/json
+
+{
+  "eventId": 1,
+  "couponTypeId": 1,
+  "couponCode": "SUMMER20",
+  "description":"20% off on summer collection",
+  "amount": 25000,
+  "validFrom":"2024-01-01T00:00:00",
+  "validTo": "2024-12-31T23:59:59",
+  "totalQuantity":10000,
+  "remainingQuantity": 10000
+}
