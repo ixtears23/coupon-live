@@ -9,4 +9,5 @@ public interface CouponRepository<T> {
     <S extends T> S save(S entity);
     <S extends T> List<S> saveAll(Iterable<S> entities);
     void delete(T entity);
+    void initializeRemainingQuantityToTotalQuantity(int couponId);
 }

@@ -18,4 +18,8 @@ public class CouponDomainService {
     public Coupon createCoupon(Coupon coupon) {
         return couponRepository.save(coupon);
     }
+
+    public void initializeRemainingQuantity(int couponId) {
+        couponRepository.initializeRemainingQuantityToTotalQuantity(couponId);
+    }
 }

@@ -81,5 +81,6 @@ public class CouponServiceImpl implements CouponService {
     public void initializeCouponIssuance(int couponId) {
         couponIssueDomainService.initialize(couponId);
         couponPoolDomainService.initializeCouponIssuance(couponId);
+        couponDomainService.initializeRemainingQuantity(couponId);
     }
 }
