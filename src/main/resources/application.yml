@@ -23,6 +23,28 @@ spring:
     properties:
       hibernate:
         format_sql: true
+---
+spring:
+  application:
+    name: coupon-live
+  config:
+    activate:
+      on-profile: stage
+  sql:
+    init:
+      mode: never
+  datasource:
+    hikari:
+      jdbc-url: jdbc:mysql://localhost:3306/coupon?useUnicode=yes&characterEncoding=UTF-8&rewriteBatchedStatements=true
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      maximum-pool-size: 10
+      max-lifetime: 30000
+      connection-timeout: 3000
+      username: abed
+      password: ${DATABASE_PASSWORD}
+  jpa:
+    hibernate:
+      ddl-auto: none
 
 ---
 spring:

@@ -27,4 +27,9 @@ public class CouponPoolRepositoryImpl implements CouponPoolRepository {
         return couponPoolJpaRepository.findByCoupon_CouponId(couponId);
     }
 
+    @Override
+    public void initializeCouponIssuance(int couponId) {
+        couponPoolJpaRepository.initializeCouponIssuance(couponId);
+    }
+
 }

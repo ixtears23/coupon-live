@@ -27,4 +27,9 @@ public class CouponIssueRepositoryImpl implements CouponIssueRepository {
     public List<CouponIssue> findByCouponIdAndUserId(Integer couponId, Integer userId) {
         return couponIssueJpaRepository.findByCoupon_CouponIdAndUser_userId(couponId, userId);
     }
+
+    @Override
+    public void initialize(int couponId) {
+        couponIssueJpaRepository.deleteByCoupon_CouponId(couponId);
+    }
 }

@@ -27,4 +27,8 @@ public class CouponIssueDomainService {
             throw new CouponIssuanceException(ErrorCode.COUPON_ALREADY_ISSUED_TO_USER);
         }
     }
+
+    public void initialize(int couponId) {
+        couponIssueRepository.initialize(couponId);
+    }
 }

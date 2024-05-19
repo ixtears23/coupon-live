@@ -8,10 +8,7 @@ import junseok.snr.couponlive.intrastructure.web.coupon.dto.IssueCouponRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
 @Slf4j
@@ -33,6 +30,12 @@ public class CouponController {
         log.info("=== 쿠폰 생성 - request : {}", request);
         final CreateCouponResponse response = couponService.createCoupon(request);
         return ResponseEntity.ok(response);
+    }
+
+    @PostMapping("/issue/initialize/{couponId}")
+    public ResponseEntity<String> initializeCouponIssuance(@PathVariable int couponId) {
+        couponService.initializeCouponIssuance(couponId);
+        return ResponseEntity.ok("발급된 쿠폰을 모두 초기화 하였습니다.");
     }
 
 }

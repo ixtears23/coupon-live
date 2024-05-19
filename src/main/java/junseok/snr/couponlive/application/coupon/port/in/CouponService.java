@@ -7,4 +7,5 @@ import junseok.snr.couponlive.intrastructure.web.coupon.dto.IssueCouponRequest;
 public interface CouponService {
     void issueCoupon(IssueCouponRequest request);
     CreateCouponResponse createCoupon(CreateCouponRequest request);
+    void initializeCouponIssuance(int couponId);
 }

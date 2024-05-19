@@ -8,4 +8,5 @@ public interface CouponPoolRepository {
     CouponPool save(CouponPool couponPool);
     CouponPool findById(int poolId);
     List<CouponPool> findByCouponId(int couponId);
+    void initializeCouponIssuance(int couponId);
 }

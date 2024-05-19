@@ -16,7 +16,7 @@ class CouponApi(FastHttpUser):
                  "userId": next(self.user_id_counter),
                  "couponId": 1,
         }
-        self.client.post("/v1/coupon", json=data, name="쿠폰 발급 API")
+        self.client.post("/v1/coupons/issue", json=data, name="쿠폰 발급 API")
 
     @task(3)  # 이 태스크의 실행 비율을 기본값의 3배로 설정
     def issue_coupon_2(self):

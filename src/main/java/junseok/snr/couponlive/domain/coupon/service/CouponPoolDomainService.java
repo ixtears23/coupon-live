@@ -8,9 +8,13 @@ import java.util.List;
 
 @RequiredArgsConstructor
 public class CouponPoolDomainService {
-    private final CouponPoolRepository repository;
+    private final CouponPoolRepository couponPoolRepository;
 
     public List<CouponPool> findByCouponId(Integer couponId) {
-        return repository.findByCouponId(couponId);
+        return couponPoolRepository.findByCouponId(couponId);
+    }
+
+    public void initializeCouponIssuance(int couponId) {
+        couponPoolRepository.initializeCouponIssuance(couponId);
     }
 }

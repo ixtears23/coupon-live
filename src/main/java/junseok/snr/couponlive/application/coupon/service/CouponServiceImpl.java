@@ -75,4 +75,11 @@ public class CouponServiceImpl implements CouponService {
 
         return new CreateCouponResponse(savedCoupon.getCouponId());
     }
+
+    @Transactional
+    @Override
+    public void initializeCouponIssuance(int couponId) {
+        couponIssueDomainService.initialize(couponId);
+        couponPoolDomainService.initializeCouponIssuance(couponId);
+    }
 }

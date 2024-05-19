@@ -10,8 +10,8 @@ Content-Type: application/json
   "amount": 25000,
   "validFrom":"2024-01-01T00:00:00",
   "validTo": "2024-12-31T23:59:59",
-  "totalQuantity":10000,
-  "remainingQuantity": 10000
+  "totalQuantity":500,
+  "remainingQuantity": 500
 }
 
 ### 쿠폰 발급
@@ -22,3 +22,6 @@ Content-Type: application/json
   "userId": 1,
   "couponId": 1
 }
+
+### 쿠폰 발급 초기화
+POST http://127.0.0.1:8080/v1/coupons/issue/initialize/3

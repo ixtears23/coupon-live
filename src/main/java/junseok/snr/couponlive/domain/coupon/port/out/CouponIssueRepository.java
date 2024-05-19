@@ -9,4 +9,5 @@ public interface CouponIssueRepository {
     CouponIssue save(CouponIssue couponIssue);
     Optional<CouponIssue> findById(Integer issueId);
     List<CouponIssue> findByCouponIdAndUserId(Integer couponId, Integer userId);
+    void initialize(int couponId);
 }

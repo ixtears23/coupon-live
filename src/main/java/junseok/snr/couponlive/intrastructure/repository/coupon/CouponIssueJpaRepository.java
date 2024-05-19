@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface CouponIssueJpaRepository extends JpaRepository<CouponIssue, Integer> {
     List<CouponIssue> findByCoupon_CouponIdAndUser_userId(int couponId, int userId);
+    void deleteByCoupon_CouponId(int couponId);
 }
