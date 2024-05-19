@@ -9,6 +9,8 @@ services:
 
   worker:
     image: locustio/locust
+    deploy:
+      replicas: 3
     volumes:
       - ./:/mnt/locust
     command: -f /mnt/locust/coupon-issue.py --worker --master-host master
