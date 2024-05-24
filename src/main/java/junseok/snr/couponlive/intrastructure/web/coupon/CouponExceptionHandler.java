@@ -38,7 +38,7 @@ public class CouponExceptionHandler {
 
     @ExceptionHandler(CouponIssuanceException.class)
     public ResponseEntity<ErrorResponse> handleCouponIssuanceException(CouponIssuanceException exception) {
-        log.error("=== 쿠폰 발급 에러", exception);
+        log.warn("=== 쿠폰 발급 불가", exception);
         final ErrorCode errorCode = exception.getErrorCode();
         return new ResponseEntity<>(
                 new ErrorResponse(errorCode.name(), errorCode.getMessage()),

@@ -19,8 +19,8 @@ POST http://127.0.0.1:8080/v1/coupons/issue
 Content-Type: application/json
 
 {
-  "userId": 1,
-  "couponId": 1
+  "userId": 3,
+  "couponId": 3
 }
 
 ### 쿠폰 발급 초기화

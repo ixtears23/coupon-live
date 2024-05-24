@@ -19,11 +19,14 @@ import junseok.snr.couponlive.intrastructure.web.coupon.dto.CreateCouponRequest;
 import junseok.snr.couponlive.intrastructure.web.coupon.dto.CreateCouponResponse;
 import junseok.snr.couponlive.intrastructure.web.coupon.dto.IssueCouponRequest;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StopWatch;
 
 import java.util.List;
 
+@Slf4j
 @RequiredArgsConstructor
 @Service
 public class CouponServiceImpl implements CouponService {
@@ -37,19 +40,36 @@ public class CouponServiceImpl implements CouponService {
     @Transactional
     @Override
     public void issueCoupon(IssueCouponRequest request) {
+        final StopWatch stopWatch = new StopWatch();
+        stopWatch.start("couponDomainService.findCouponOrThrow");
         final Coupon coupon = couponDomainService.findCouponOrThrow(request.couponId());
+        stopWatch.stop();
+        stopWatch.start("userDomainService.findById");
         final User user = userDomainService.findById(request.userId());
+        stopWatch.stop();
 
+        stopWatch.start("coupon.issue");
         final CouponIssue couponIssue = coupon.issue(user);
+        stopWatch.stop();
 
+        stopWatch.start("couponPoolDomainService.findByCouponId");
         final List<CouponPool> couponPoolList = couponPoolDomainService.findByCouponId(coupon.getCouponId());
+        stopWatch.stop();
+        stopWatch.start("couponPoolList.stream");
         final CouponPool foundCouponPool = couponPoolList.stream()
                 .filter(couponPool -> !couponPool.getIsAssigned())
                 .findFirst()
                 .orElseThrow(() -> new CouponIssuanceException(ErrorCode.NO_AVAILABLE_COUPON_POOL));
+        stopWatch.stop();
 
+        stopWatch.start("foundCouponPool.issueCoupon");
         foundCouponPool.issueCoupon(couponIssue);
+        stopWatch.stop();
+        stopWatch.start("couponIssueDomainService.issueCoupon");
         couponIssueDomainService.issueCoupon(couponIssue);
+        stopWatch.stop();
+
+        log.info("=== stopWatch : {}", stopWatch.prettyPrint());
     }
 
     @Transactional
