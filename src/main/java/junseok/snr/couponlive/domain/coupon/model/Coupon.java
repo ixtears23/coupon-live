@@ -6,6 +6,7 @@ import junseok.snr.couponlive.domain.coupon.exception.ErrorCode;
 import junseok.snr.couponlive.domain.event.model.Event;
 import junseok.snr.couponlive.domain.user.model.User;
 import lombok.*;
+import org.springframework.util.StopWatch;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -90,13 +91,17 @@ public class Coupon {
     }
 
     public CouponIssue issue(User user) {
+        final StopWatch stopWatch = new StopWatch();
         validateAvailableQuantity();
         validateAvailableDate();
         validateAlreadyIssuedToUser(user);
 
-        this.remainingQuantity--;
+        final CouponPool availableCouponPool = pools.stream()
+                .filter(couponPool -> !couponPool.getIsAssigned())
+                .findFirst()
+                .orElseThrow(() -> new CouponIssuanceException(ErrorCode.NO_AVAILABLE_COUPON_POOL));
 
-        return CouponIssue.builder()
+        final CouponIssue issuedCoupon = CouponIssue.builder()
                 .coupon(this)
                 .user(user)
                 .status(IssueStatus.ISSUED)
@@ -106,8 +111,19 @@ public class Coupon {
                 .validTo(validTo)
                 .issuedAt(LocalDateTime.now())
                 .build();
+
+        this.remainingQuantity--;
+
+        availableCouponPool.issueCoupon(issuedCoupon);
+
+        return issuedCoupon;
     }
 
+    /**
+     * 이미 쿠폰을 발급받은 유저인지 확인한다.
+     *
+     * @param user
+     */
     private void validateAlreadyIssuedToUser(User user) {
         final CouponIssue issuedCoupon = this.getPools().stream()
                 .map(CouponPool::getCouponIssue)

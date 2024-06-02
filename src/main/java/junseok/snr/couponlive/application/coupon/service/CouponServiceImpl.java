@@ -52,19 +52,6 @@ public class CouponServiceImpl implements CouponService {
         final CouponIssue couponIssue = coupon.issue(user);
         stopWatch.stop();
 
-        stopWatch.start("couponPoolDomainService.findByCouponId");
-        final List<CouponPool> couponPoolList = couponPoolDomainService.findByCouponId(coupon.getCouponId());
-        stopWatch.stop();
-        stopWatch.start("couponPoolList.stream");
-        final CouponPool foundCouponPool = couponPoolList.stream()
-                .filter(couponPool -> !couponPool.getIsAssigned())
-                .findFirst()
-                .orElseThrow(() -> new CouponIssuanceException(ErrorCode.NO_AVAILABLE_COUPON_POOL));
-        stopWatch.stop();
-
-        stopWatch.start("foundCouponPool.issueCoupon");
-        foundCouponPool.issueCoupon(couponIssue);
-        stopWatch.stop();
         stopWatch.start("couponIssueDomainService.issueCoupon");
         couponIssueDomainService.issueCoupon(couponIssue);
         stopWatch.stop();
