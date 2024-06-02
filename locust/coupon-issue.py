@@ -3,8 +3,8 @@ from itertools import count
 import random
 
 class CouponApi(FastHttpUser):
-    network_timeout = 10.0
-    connection_timeout = 10.0
+    network_timeout = 30.0
+    connection_timeout = 30.0
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -16,5 +16,6 @@ class CouponApi(FastHttpUser):
                  "userId": next(self.user_id_counter),
                  "couponId": 3,
         }
-        self.client.post("/v1/coupons/issue", json=data, name="쿠폰 발급 API")
-
+        with self.client.post("/v1/coupons/issue", json=data, name="쿠폰 발급 API", catch_response=True) as response:
+            if response.status_code == 400:
+                response.success()

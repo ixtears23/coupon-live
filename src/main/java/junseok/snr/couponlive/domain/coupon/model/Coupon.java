@@ -6,6 +6,7 @@ import junseok.snr.couponlive.domain.coupon.exception.ErrorCode;
 import junseok.snr.couponlive.domain.event.model.Event;
 import junseok.snr.couponlive.domain.user.model.User;
 import lombok.*;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.StopWatch;
 
 import java.time.LocalDateTime;
@@ -14,6 +15,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.IntStream;
 
+@Slf4j
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 @Setter
@@ -92,15 +94,24 @@ public class Coupon {
 
     public CouponIssue issue(User user) {
         final StopWatch stopWatch = new StopWatch();
+        stopWatch.start("validateAvailableQuantity");
         validateAvailableQuantity();
+        stopWatch.stop();
+        stopWatch.start("validateAvailableDate");
         validateAvailableDate();
+        stopWatch.stop();
+        stopWatch.start("validateAlreadyIssuedToUser");
         validateAlreadyIssuedToUser(user);
+        stopWatch.stop();
 
+        stopWatch.start("pools.stream()");
         final CouponPool availableCouponPool = pools.stream()
                 .filter(couponPool -> !couponPool.getIsAssigned())
                 .findFirst()
                 .orElseThrow(() -> new CouponIssuanceException(ErrorCode.NO_AVAILABLE_COUPON_POOL));
+        stopWatch.stop();
 
+        stopWatch.start("CouponIssue.builder()");
         final CouponIssue issuedCoupon = CouponIssue.builder()
                 .coupon(this)
                 .user(user)
@@ -111,10 +122,15 @@ public class Coupon {
                 .validTo(validTo)
                 .issuedAt(LocalDateTime.now())
                 .build();
+        stopWatch.stop();
 
         this.remainingQuantity--;
 
+        stopWatch.start("availableCouponPool.issueCoupon(issuedCoupon)");
         availableCouponPool.issueCoupon(issuedCoupon);
+        stopWatch.stop();
+
+        log.info("=== stopWatch : {}", stopWatch.prettyPrint());
 
         return issuedCoupon;
     }
