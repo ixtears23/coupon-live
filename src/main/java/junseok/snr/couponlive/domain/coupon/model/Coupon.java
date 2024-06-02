@@ -10,9 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.StopWatch;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.IntStream;
 
 @Slf4j
@@ -62,6 +60,9 @@ public class Coupon {
     @Enumerated(EnumType.STRING)
     @Column(name = "status")
     private CouponStatus status;
+
+    @Transient
+    private Set<Integer> issuedUserIds = new HashSet<>();
 
     @Builder
     public Coupon(Event event,
@@ -132,6 +133,8 @@ public class Coupon {
 
         log.info("=== stopWatch : {}", stopWatch.prettyPrint());
 
+        issuedUserIds.add(user.getUserId());
+
         return issuedCoupon;
     }
 
@@ -141,14 +144,7 @@ public class Coupon {
      * @param user
      */
     private void validateAlreadyIssuedToUser(User user) {
-        final CouponIssue issuedCoupon = this.getPools().stream()
-                .map(CouponPool::getCouponIssue)
-                .filter(Objects::nonNull)
-                .filter(couponIssue -> couponIssue.getUser() == user)
-                .findAny()
-                .orElse(null);
-
-        if (issuedCoupon != null) {
+        if (issuedUserIds.contains(user.getUserId())) {
             throw new CouponIssuanceException(ErrorCode.COUPON_ALREADY_ISSUED_TO_USER);
         }
     }
