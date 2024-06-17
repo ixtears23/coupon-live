@@ -9,6 +9,7 @@ import java.util.UUID;
 @Setter
 @Getter
 @AllArgsConstructor
+@Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "coupon_pool")
 @Entity
