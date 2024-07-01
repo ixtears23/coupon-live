@@ -25,9 +25,6 @@ public class Coupon {
     @Column(name = "coupon_id")
     private Integer couponId;
 
-    @OneToMany(mappedBy = "coupon", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<CouponPool> pools = new ArrayList<>();
-
     @ManyToOne
     @JoinColumn(name = "event_id")
     private Event event;
@@ -84,13 +81,6 @@ public class Coupon {
         this.totalQuantity = totalQuantity;
         this.remainingQuantity = remainingQuantity;
         this.status = CouponStatus.ACTIVE;
-        initializePools();
-    }
-
-    private void initializePools() {
-        this.pools = IntStream.range(0, totalQuantity)
-                .mapToObj(i -> new CouponPool(this))
-                .toList();
     }
 
     public CouponIssue issue(User user) {
@@ -103,13 +93,6 @@ public class Coupon {
         stopWatch.stop();
         stopWatch.start("validateAlreadyIssuedToUser");
         validateAlreadyIssuedToUser(user);
-        stopWatch.stop();
-
-        stopWatch.start("pools.stream()");
-        final CouponPool availableCouponPool = pools.stream()
-                .filter(couponPool -> !couponPool.getIsAssigned())
-                .findFirst()
-                .orElseThrow(() -> new CouponIssuanceException(ErrorCode.NO_AVAILABLE_COUPON_POOL));
         stopWatch.stop();
 
         stopWatch.start("CouponIssue.builder()");
@@ -126,10 +109,6 @@ public class Coupon {
         stopWatch.stop();
 
         this.remainingQuantity--;
-
-        stopWatch.start("availableCouponPool.issueCoupon(issuedCoupon)");
-        availableCouponPool.issueCoupon(issuedCoupon);
-        stopWatch.stop();
 
         log.info("=== stopWatch : {}", stopWatch.prettyPrint());
 

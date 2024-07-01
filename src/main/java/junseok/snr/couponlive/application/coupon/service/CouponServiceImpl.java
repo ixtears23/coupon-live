@@ -37,6 +37,10 @@ public class CouponServiceImpl implements CouponService {
     private final UserDomainService userDomainService;
     private final EventDomainService eventDomainService;
 
+    /**
+     * 쿠폰 발급
+     * @param request
+     */
     @Transactional
     @Override
     public void issueCoupon(IssueCouponRequest request) {
