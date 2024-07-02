@@ -6,14 +6,12 @@
         </encoder>
     </appender>
 
-<!--    <logger name="org.hibernate.SQL" level="DEBUG"/>
+    <logger name="org.hibernate.SQL" level="DEBUG"/>
     <logger name="org.hibernate.orm.jdbc.binde" level="TRACE"/>
     <logger name="org.hibernate.orm.sql.ast.create" level="DEBUG"/>
-    <logger name="junseok.snr.couponlive" level="DEBUG"/>-->
+    <logger name="junseok.snr.couponlive" level="DEBUG"/>
 
-
-
-    <root level="WARN">
+    <root level="INFO">
         <appender-ref ref="STDOUT"/>
     </root>
 </included>

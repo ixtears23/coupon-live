@@ -1,6 +1,11 @@
 # 대용량 트래픽 쿠폰 발급 시스템
 
 ## 실행 방법
+- docker-compose.yml(redis, mysql) 파일 실행  
+프로젝트 루트 경로에서 아래 스크립트 실행
+  ~~~shell
+  $ docker-compose up -d
+  ~~~ 
 - `mysql_password.txt` 파일 생성
   - 파일 위치 : 프로젝트 루트 경로
   - 파일 내용 : 비밀번호만 입력  
@@ -9,10 +14,6 @@
   - 파일 위치 : 프로젝트 루트 경로
   - 파일 내용 : 비밀번호만 입력  
   비밀번호가 `abcd` 인 경우 파일 내용은 `abcd`
-- redis, mysql container 실행(프로젝트 루트 경로에서 아래 스크립트 실행)
-  ~~~shell
-  $ docker-compose up -d
-  ~~~
 - profile : local
 - Environment 설정 예시
   - intelliJ  

@@ -4,6 +4,10 @@ spring:
   config:
     activate:
       on-profile: local
+  data:
+    redis:
+      host: localhost
+      port: 6380
   sql:
     init:
       mode: never
