@@ -1,8 +1,8 @@
 package junseok.snr.couponlive.application.coupon.port.in;
 
-import junseok.snr.couponlive.intrastructure.web.coupon.dto.CreateCouponRequest;
-import junseok.snr.couponlive.intrastructure.web.coupon.dto.CreateCouponResponse;
-import junseok.snr.couponlive.intrastructure.web.coupon.dto.IssueCouponRequest;
+import junseok.snr.couponlive.adaptor.in.web.coupon.dto.CreateCouponRequest;
+import junseok.snr.couponlive.adaptor.in.web.coupon.dto.CreateCouponResponse;
+import junseok.snr.couponlive.adaptor.in.web.coupon.dto.IssueCouponRequest;
 
 public interface CouponService {
     void issueCoupon(IssueCouponRequest request);

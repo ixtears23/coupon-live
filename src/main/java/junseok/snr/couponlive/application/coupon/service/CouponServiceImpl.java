@@ -1,11 +1,8 @@
 package junseok.snr.couponlive.application.coupon.service;
 
 import junseok.snr.couponlive.application.coupon.port.in.CouponService;
-import junseok.snr.couponlive.domain.coupon.exception.CouponIssuanceException;
-import junseok.snr.couponlive.domain.coupon.exception.ErrorCode;
 import junseok.snr.couponlive.domain.coupon.model.Coupon;
 import junseok.snr.couponlive.domain.coupon.model.CouponIssue;
-import junseok.snr.couponlive.domain.coupon.model.CouponPool;
 import junseok.snr.couponlive.domain.coupon.model.CouponType;
 import junseok.snr.couponlive.domain.coupon.service.CouponDomainService;
 import junseok.snr.couponlive.domain.coupon.service.CouponIssueDomainService;
@@ -15,16 +12,14 @@ import junseok.snr.couponlive.domain.event.model.Event;
 import junseok.snr.couponlive.domain.event.service.EventDomainService;
 import junseok.snr.couponlive.domain.user.model.User;
 import junseok.snr.couponlive.domain.user.service.UserDomainService;
-import junseok.snr.couponlive.intrastructure.web.coupon.dto.CreateCouponRequest;
-import junseok.snr.couponlive.intrastructure.web.coupon.dto.CreateCouponResponse;
-import junseok.snr.couponlive.intrastructure.web.coupon.dto.IssueCouponRequest;
+import junseok.snr.couponlive.adaptor.in.web.coupon.dto.CreateCouponRequest;
+import junseok.snr.couponlive.adaptor.in.web.coupon.dto.CreateCouponResponse;
+import junseok.snr.couponlive.adaptor.in.web.coupon.dto.IssueCouponRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StopWatch;
-
-import java.util.List;
 
 @Slf4j
 @RequiredArgsConstructor

@@ -2,10 +2,10 @@ package junseok.snr.couponlive;
 
 import junseok.snr.couponlive.domain.coupon.port.out.CouponIssueRepository;
 import junseok.snr.couponlive.domain.coupon.port.out.CouponPoolRepository;
-import junseok.snr.couponlive.intrastructure.repository.coupon.CouponIssueJpaRepository;
-import junseok.snr.couponlive.intrastructure.repository.coupon.CouponIssueRepositoryImpl;
-import junseok.snr.couponlive.intrastructure.repository.coupon.CouponPoolJpaRepository;
-import junseok.snr.couponlive.intrastructure.repository.coupon.CouponPoolRepositoryImpl;
+import junseok.snr.couponlive.adaptor.out.persistence.coupon.CouponIssueJpaRepository;
+import junseok.snr.couponlive.adaptor.out.persistence.coupon.CouponIssueRepositoryImpl;
+import junseok.snr.couponlive.adaptor.out.persistence.coupon.CouponPoolJpaRepository;
+import junseok.snr.couponlive.adaptor.out.persistence.coupon.CouponPoolRepositoryImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
