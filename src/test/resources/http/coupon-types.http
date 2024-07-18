@@ -1,3 +1,4 @@
+### 쿠폰 타입 생성
 POST http://127.0.0.1:8080/v1/coupon-types
 Content-Type: application/json
 
