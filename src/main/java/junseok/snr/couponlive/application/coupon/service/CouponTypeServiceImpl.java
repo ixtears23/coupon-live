@@ -23,8 +23,8 @@ public class CouponTypeServiceImpl implements CouponTypeService {
                 .description(request.description())
                 .build();
 
-        CouponType savedCouponType = couponTypeDomainService.save(couponType);
-        return new CreateCouponTypeResponse(savedCouponType.getTypeId());
+        final CouponType savedCouponType = couponTypeDomainService.save(couponType);
+        return new CreateCouponTypeResponse(savedCouponType);
     }
 
 }

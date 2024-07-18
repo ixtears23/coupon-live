@@ -26,5 +26,4 @@ public class CouponTypeController {
         return ResponseEntity.ok(response);
     }
 
-
 }
