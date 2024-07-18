@@ -15,6 +15,10 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserController {
     private final UserService userService;
 
+    /**
+     * count 수 만큼 Random 유저 생성
+     * @param count 생성할 User 수
+     */
     @PostMapping("/random/{count}")
     public void createRandomUsers(@PathVariable int count) {
         userService.createRandomUsers(count);
