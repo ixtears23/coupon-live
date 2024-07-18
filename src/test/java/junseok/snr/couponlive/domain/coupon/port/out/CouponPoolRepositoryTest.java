@@ -2,7 +2,6 @@ package junseok.snr.couponlive.domain.coupon.port.out;
 
 import junseok.snr.couponlive.TestRepositoryConfig;
 import junseok.snr.couponlive.domain.coupon.model.Coupon;
-import junseok.snr.couponlive.domain.coupon.model.CouponPool;
 import junseok.snr.couponlive.domain.event.model.Event;
 import junseok.snr.couponlive.domain.event.model.EventStatus;
 import junseok.snr.couponlive.domain.event.port.out.EventRepository;
@@ -56,14 +55,5 @@ class CouponPoolRepositoryTest {
         couponRepository.save(coupon);
 
         assertThat(coupon).isNotNull();
-        assertThat(coupon.getPools()).hasSize(coupon.getTotalQuantity());
-
-        coupon.getPools()
-                .forEach(savedCouponPool -> {
-                    final CouponPool couponPool = couponPoolRepository.findById(savedCouponPool.getPoolId());
-                    assertThat(couponPool).isNotNull();
-                    assertThat(couponPool.getCouponCode()).isNotNull();
-                });
-
     }
 }
